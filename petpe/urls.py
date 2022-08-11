@@ -13,7 +13,7 @@ router.register(r'comments', views.CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('<int:story_id>/story_like', views.post_like, name="story_like"),
+    path('<int:story_id>/story_like/', views.post_like, name="story_like"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

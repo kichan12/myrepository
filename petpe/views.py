@@ -39,16 +39,16 @@ def post_like(request,story_id):
     if request.user.is_authenticated:
         if request.method == "POST":
             story = get_object_or_404(models.Story, pk=story_id)
-            existed_user = Story.image_likes.filter(pk=request.user.id).exists()
+            existed_user = story.image_likes.filter(pk=request.user.id).exists()
 
             if existed_user:
             # 좋아요 누른 상태일 때는 "좋아요 취소"
-                story.image_likes.remove(request.user)
+                story.image_likes.remove(request.user.id)
                 response_body["result"] = "dislike"
 
             else:
             # 좋아요가 아닐때 "좋아요"
-                story.image_likes.add(status=200,data=request.user)
+                story.image_likes.add(request.user.id)
                 response_body["result"] = "like"
 
             story.save()

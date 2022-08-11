@@ -58,7 +58,6 @@ class StorySerializer(serializers.ModelSerializer):
         model = Story
         fields = ['id', 'title', 'content', 'pictures', 'createdAt', 'updatedAt', 'user_id', 'username', 'useremail', 'userimage', 'comments','image_likes']
         read_only_fields=['image_likes']
-    
     def create(self, validated_data):
         instance = Story.objects.create(**validated_data)
         storypicture_set = self.context['request'].FILES
