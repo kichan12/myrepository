@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import User
+from accounts.models import User 
 
 # 이미지 여러개 업로드 가능한 기능 찾기
 class Story(models.Model):
@@ -8,7 +8,11 @@ class Story(models.Model):
     content = models.TextField()
     createdAt = models.DateTimeField(auto_now_add=True, null=True)
     updatedAt = models.DateTimeField(auto_now=True, null=True)
-    
+    image_likes = models.ManyToManyField(
+                User,
+                blank=True,
+                related_name='story_image_likes'
+    )
     def __str__(self):
         return self.title
     
